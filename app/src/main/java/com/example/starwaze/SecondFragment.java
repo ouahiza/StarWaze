@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class SecondFragment extends Fragment {
+    Integer myArg = SecondFragmentArgs.fromBundle(getArguments()).getMyArg();
 
     @Override
     public View onCreateView(
