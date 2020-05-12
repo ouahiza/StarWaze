@@ -13,4 +13,8 @@
     <string name="count_button_text">Count</string>
     <string name="random_button_text">Random</string>
     <string name="toast_text">Hello Toast!</string>
+    <string name="appTitle_text">Star Waze</string>
+    <string name="article_icon">article icon</string>
+    <string name="article_description">Article description</string>
+    <string name="article_title">Article title</string>
 </resources>
