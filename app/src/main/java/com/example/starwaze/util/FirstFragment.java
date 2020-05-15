@@ -1,4 +1,4 @@
-package com.example.starwaze;
+package com.example.starwaze.util;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.example.starwaze.R;
 
 public class FirstFragment extends Fragment {
 

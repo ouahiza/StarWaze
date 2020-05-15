@@ -1,24 +1,31 @@
-package com.example.starwaze;
+package com.example.starwaze.util;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.starwaze.R;
+import com.example.starwaze.adapters.ArticleAdapter;
+import com.example.starwaze.modeles.Article;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ArticleAdapter.OnArticleListener {
+    private static final String TAG = "MainActivity";
     private RecyclerView recyclerView;
-    private MyAdapter myAdapter;
+    private ArticleAdapter articleAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Data> data = Collections.emptyList();;
+    private List<Article> articles = Collections.emptyList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        List<Data> data = fill_with_data();
+        List<Article> articles = fill_with_article();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Toolbar toolbar = findViewById(R.id.toolbar);
@@ -32,22 +39,32 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         // define an adapter
-        myAdapter = new MyAdapter(data, getApplication());
-        recyclerView.setAdapter(myAdapter);
+        articleAdapter = new ArticleAdapter(articles, getApplication(), this);
+        recyclerView.setAdapter(articleAdapter);
 
         layoutManager = new LinearLayoutManager(this);
     }
 
-    private List<Data> fill_with_data() {
-        this.data = new ArrayList<>();
-        data.add(new Data("Understand our solar system","How many planets are there on our solar system ? What type of planet are each of them? All the answers are here!", R.drawable.solar_system));
-        data.add(new Data("Life of a star", "If you always wanted to be a star, understand what it takes to be one first", R.drawable.star));
-        data.add(new Data("What's an eclipse ?", "Do not ever look at an eclipse with bear eyes...here's why", R.drawable.eclipse));
-        data.add(new Data("Nasa next project","Be the next nerd", R.drawable.astronaut));
-        data.add(new Data("The mystery of black holes", "What's in the other side of the tunnel ?", R.drawable.black_hole));
-        data.add(new Data("How does a spaceship work ?", "Just in case you're called for a mission", R.drawable.space_shuttle));
+    private List<Article> fill_with_article() {
+        this.articles = new ArrayList<>();
+        articles.add(new Article("Understand our solar system","How many planets are there on our solar system ? What type of planet are each of them? All the answers are here!", R.drawable.solar_system));
+        articles.add(new Article("Life of a star", "If you always wanted to be a star, understand what it takes to be one first", R.drawable.star));
+        articles.add(new Article("What's an eclipse ?", "Do not ever look at an eclipse with bear eyes...here's why", R.drawable.eclipse));
+        articles.add(new Article("Nasa next project","Be the next nerd", R.drawable.astronaut));
+        articles.add(new Article("The mystery of black holes", "What's in the other side of the tunnel ?", R.drawable.black_hole));
+        articles.add(new Article("How does a spaceship work ?", "Just in case you're called for a mission", R.drawable.space_shuttle));
 
-        return data;
+        return articles;
+    }
+
+    @Override
+    public void onArticleClick(int position) {
+        Log.d(TAG, "onArticleClick: opening");
+
+        Intent intent = new Intent(this, ArticleActivity.class);
+        intent.putExtra("selected_article", articles.get(position));
+        startActivity(intent);
+
     }
         /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

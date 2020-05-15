@@ -1,4 +1,4 @@
-package com.example.starwaze;
+package com.example.starwaze.util;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.starwaze;
+package com.example.starwaze.util;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.starwaze.R;
 
 import java.util.Random;
 
