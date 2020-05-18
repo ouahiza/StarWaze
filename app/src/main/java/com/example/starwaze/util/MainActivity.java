@@ -3,6 +3,8 @@ package com.example.starwaze.util;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
     private ArticleAdapter articleAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Article> articles = Collections.emptyList();
+    private Button buttonApod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,14 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
         setContentView(R.layout.activity_main);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+
+        buttonApod = (Button) findViewById(R.id.buttonApod);
+        buttonApod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openApodActivity();
+            }
+        });
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         // in content do not change the layout size
@@ -45,12 +56,17 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
         layoutManager = new LinearLayoutManager(this);
     }
 
+    private void openApodActivity() {
+        Intent intent = new Intent(this, ApodActivity.class);
+        startActivity(intent);
+    }
+
     private List<Article> fill_with_article() {
         this.articles = new ArrayList<>();
-        articles.add(new Article("Understand our solar system","How many planets are there on our solar system ? What type of planet are each of them? All the answers are here!", R.drawable.solar_system));
+        articles.add(new Article("Understand our solar system", "How many planets are there on our solar system ? What type of planet are each of them? All the answers are here!", R.drawable.solar_system));
         articles.add(new Article("Life of a star", "If you always wanted to be a star, understand what it takes to be one first", R.drawable.star));
         articles.add(new Article("What's an eclipse ?", "Do not ever look at an eclipse with bear eyes...here's why", R.drawable.eclipse));
-        articles.add(new Article("Nasa next project","Be the next nerd", R.drawable.astronaut));
+        articles.add(new Article("Nasa next project", "Be the next nerd", R.drawable.astronaut));
         articles.add(new Article("The mystery of black holes", "What's in the other side of the tunnel ?", R.drawable.black_hole));
         articles.add(new Article("How does a spaceship work ?", "Just in case you're called for a mission", R.drawable.space_shuttle));
 

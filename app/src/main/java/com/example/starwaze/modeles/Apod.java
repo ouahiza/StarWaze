@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 
 public class Apod {
-
     private String copyright;
     private Date date;
     private String explanation;

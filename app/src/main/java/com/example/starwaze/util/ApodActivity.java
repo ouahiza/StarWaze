@@ -5,11 +5,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.starwaze.APODAPI;
+import com.example.starwaze.APODApi;
 import com.example.starwaze.R;
 import com.example.starwaze.modeles.Apod;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,48 +16,44 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApodActivity extends AppCompatActivity {
-    private TextView titleApod;
+    private TextView apodTitle;
     public static final String BASE_URL = "https://api.nasa.gov/planetary/";
-    public static Retrofit retrofit = null;
 
     @Override
-    protected  void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apod);
 
-        titleApod = findViewById(R.id.title_apod_activity);
+        apodTitle = findViewById(R.id.title_apod_activity);
 
-        retrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        APODAPI apodApi = retrofit.create((APODAPI.class));
+        APODApi apodApi = retrofit.create(APODApi.class);
 
-        Call<List<Apod>> call = apodApi.loadApods();
+        Call<Apod> call = apodApi.getApod();
 
-        call.enqueue(new Callback<List<Apod>>() {
+        call.enqueue(new Callback<Apod>() {
             @Override
-            public void onResponse(Call<List<Apod>> call, Response<List<Apod>> response) {
-
-                if(!response.isSuccessful()){
-                    titleApod.setText(("Code: " + response.code()));
+            public void onResponse(Call<Apod> call, Response<Apod> response) {
+                if (!response.isSuccessful()) {
+                    apodTitle.setText("Code: " + response.code());
                     return;
                 }
-                String content = "";
-                List<Apod> apods = response.body();
-                for (Apod apod : apods){
-                    content += "Title: " + apod.getApodTitle();
 
-                    titleApod.append(content);
-                }
+                Apod apod = response.body();
+
+                String content = apod.getApodTitle();
+
+                apodTitle.append(content);
             }
 
             @Override
-            public void onFailure(Call<List<Apod>> call, Throwable t) {
-                titleApod.setText((t.getMessage()));
+            public void onFailure(Call<Apod> call, Throwable t) {
+                apodTitle.setText((t.getMessage()));
             }
         });
-
     }
 }

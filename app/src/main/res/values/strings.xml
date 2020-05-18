@@ -18,4 +18,5 @@
     <string name="article_description">Article description</string>
     <string name="article_title">Article title</string>
     <string name="article_illustration">Article illustration</string>
+    <string name="apod_illustration">Apod illustration</string>
 </resources>

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.starwaze.util.ArticleActivity">
+    tools:context="com.example.starwaze.util.ApodActivity">
 
     <ImageView
         android:id="@+id/image_apod_activity"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:contentDescription="@string/article_illustration"
+        android:contentDescription="@string/apod_illustration"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

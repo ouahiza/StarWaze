@@ -2,12 +2,11 @@ package com.example.starwaze;
 
 import com.example.starwaze.modeles.Apod;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface APODAPI {
-    @GET("apod")
-Call<List<Apod>> loadApods();
+public interface APODApi {
+
+    @GET("apod?api_key=hqjA9ljxF8AVy6AVgPPbvSl9l1LPiwzUzOYASlpN")
+    Call<Apod> getApod();
 }
