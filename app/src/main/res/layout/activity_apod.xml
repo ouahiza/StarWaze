@@ -7,8 +7,15 @@
     android:orientation="vertical"
     tools:context="com.example.starwaze.util.ApodActivity">
 
-    <ImageView
-        android:id="@+id/image_apod_activity"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.PopupOverlay"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!--<VideoView
+        android:id="@+id/video_apod_activity"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:contentDescription="@string/apod_illustration"
@@ -16,6 +23,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />-->
+
+    <ImageView
+        android:id="@+id/image_apod_activity"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:contentDescription="@string/apod_illustration"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -27,18 +46,35 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_apod_activity"/>
+        app:layout_constraintTop_toBottomOf="@+id/image_apod_activity" />
+
+    <TextView
+        android:id="@+id/date_apod_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        app:layout_constraintBottom_toTopOf="@+id/explanation_apod_activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_apod_activity"
+        app:layout_constraintVertical_bias="0.229" />
 
     <TextView
         android:id="@+id/explanation_apod_activity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="TextView"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_apod_activity" />
+        app:layout_constraintTop_toBottomOf="@+id/date_apod_activity" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
