@@ -32,8 +32,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".util.ArticleActivity" />
-        <activity android:name=".util.ApodActivity" />
+        <activity android:name=".util.ArticleActivity"
+            android:theme="@style/AppTheme.SlidrActivityTheme"/>
+
+        <activity android:name=".util.ApodActivity"
+            android:theme="@style/AppTheme.SlidrActivityTheme"/>
     </application>
 
 </manifest>

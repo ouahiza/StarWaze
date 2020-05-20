@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.starwaze.R;
 import com.example.starwaze.modeles.Article;
+import com.r0adkll.slidr.Slidr;
 
 
 public class ArticleActivity extends AppCompatActivity {
@@ -28,6 +29,9 @@ public class ArticleActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+        //Slide Feature
+        Slidr.attach(this);
+
         Article article = null;
 
         if (getIntent().hasExtra("selected_article")) {
@@ -43,4 +47,5 @@ public class ArticleActivity extends AppCompatActivity {
         articleTitle.setText(article.getTitle());
         articleDescription.setText(article.getDescription());
     }
+
 }

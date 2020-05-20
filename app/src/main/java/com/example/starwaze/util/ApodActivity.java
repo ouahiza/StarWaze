@@ -2,12 +2,14 @@ package com.example.starwaze.util;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -29,9 +31,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
-
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
+import com.r0adkll.slidr.Slidr;
 
 
 public class ApodActivity extends AppCompatActivity {
@@ -54,6 +58,9 @@ public class ApodActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_apod);
         getSupportActionBar().hide();
+
+        //Slide Feature
+        Slidr.attach(this);
 
         context = this;
 
@@ -84,7 +91,7 @@ public class ApodActivity extends AppCompatActivity {
                 String titleContent = apod.getApodTitle();
                 String explanationContent = apod.getExplanation();
                 //Date dateContent = apod.getDate();
-                String url = apod.getUrl();
+                String hdurl = apod.getHdurl();
 
                 apodTitle.append(titleContent);
                 //apodDate.append(dateContent.toString());
@@ -93,11 +100,11 @@ public class ApodActivity extends AppCompatActivity {
 
                 if (apod.getMedia_type().equals("image")) {
 
-                    Glide.with(context).load(url).override(300, 200).into(apodImage);
+                    Glide.with(context).load(hdurl).into(apodImage);
 
-                } else if (apod.getMedia_type().equals("video")) {
+                } //else if (apod.getMedia_type().equals("video")) {
 
-                    //apodVideo = (VideoView) findViewById(R.id.video_apod_activity);
+                //apodVideo = (VideoView) findViewById(R.id.video_apod_activity);
 
 //                    MediaController mediaController;
 //                    Log.e("entered", "playvideo");
@@ -105,8 +112,8 @@ public class ApodActivity extends AppCompatActivity {
 //                    progressDialog = ProgressDialog.show(ApodActivity.this, "", "Buffering video...", true);
 //                    progressDialog.setCancelable(true);
 
-                   // PlayVideo(url);
-                }
+                // PlayVideo(url);
+                //}
             }
 
             @Override
@@ -114,6 +121,14 @@ public class ApodActivity extends AppCompatActivity {
                 apodTitle.setText((t.getMessage()));
             }
         });
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            showRotationToast();
+        }
+    }
+
+    public void showRotationToast() {
+        StyleableToast.makeText(context, "Rotate your phone to see full picture", R.style.rotationToast).show();
     }
 
     /*private void PlayVideo(String url) {

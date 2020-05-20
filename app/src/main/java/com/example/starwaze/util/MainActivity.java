@@ -3,30 +3,36 @@ package com.example.starwaze.util;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.starwaze.R;
 import com.example.starwaze.adapters.ArticleAdapter;
 import com.example.starwaze.modeles.Article;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ArticleAdapter.OnArticleListener {
+public class MainActivity extends AppCompatActivity implements ArticleAdapter.OnArticleListener, NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
     private RecyclerView recyclerView;
     private ArticleAdapter articleAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Article> articles = Collections.emptyList();
-    private Button buttonApod;
+    private DrawerLayout drawer;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
         super.onCreate(savedInstanceState);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -43,13 +50,10 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
 
         getSupportActionBar().hide();
 
-        buttonApod = (Button) findViewById(R.id.buttonApod);
-        buttonApod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openApodActivity();
-            }
-        });
+        drawer = findViewById(R.id.drawer_layout_main_activity);
+        navigationView = findViewById(R.id.menu);
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         // in content do not change the layout size
@@ -102,6 +106,27 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
         intent.putExtra("selected_article", articles.get(position));
         startActivity(intent);
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.menu_apod:
+                openApodActivity();
+                break;
+            case R.id.menu_send_a_question:
+                //openApodActivity();
+                break;
+            case R.id.menu_settings:
+                //openApodActivity();
+                break;
+            case R.id.menu_about_us:
+                //openApodActivity();
+                break;
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
         /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
