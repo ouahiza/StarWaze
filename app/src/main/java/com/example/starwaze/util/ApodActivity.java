@@ -38,7 +38,7 @@ public class ApodActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private TextView apodTitle;
     private TextView apodExplanation;
-    private TextView apodDate;
+    //private TextView apodDate;
     private ImageView apodImage;
     private VideoView apodVideo;
     private Context context;
@@ -59,7 +59,7 @@ public class ApodActivity extends AppCompatActivity {
 
         apodTitle = findViewById(R.id.title_apod_activity);
         apodExplanation = findViewById((R.id.explanation_apod_activity));
-        apodDate = findViewById(R.id.date_apod_activity);
+        //apodDate = findViewById(R.id.date_apod_activity);
         apodImage = findViewById(R.id.image_apod_activity);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -83,11 +83,11 @@ public class ApodActivity extends AppCompatActivity {
 
                 String titleContent = apod.getApodTitle();
                 String explanationContent = apod.getExplanation();
-                Date dateContent = apod.getDate();
+                //Date dateContent = apod.getDate();
                 String url = apod.getUrl();
 
                 apodTitle.append(titleContent);
-                apodDate.append(dateContent.toString());
+                //apodDate.append(dateContent.toString());
                 apodExplanation.append(explanationContent);
                 apodExplanation.setMovementMethod(new ScrollingMovementMethod());
 
