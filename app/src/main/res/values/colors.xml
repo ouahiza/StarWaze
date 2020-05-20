@@ -5,4 +5,7 @@
     <color name="colorPrimaryDark">#134A79</color>
     <color name="colorAccent">#134A79</color>
     <color name="colorPink">#FC4381</color>
+
+    <color name="card_bg_color">#f6f6f6</color>
+
 </resources>

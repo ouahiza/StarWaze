@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,10 +38,12 @@ public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHol
         TextView title;
         TextView description;
         View layout;
+        RelativeLayout itemContainer;
         OnArticleListener onArticleListener;
 
         public ViewHolder(@NonNull View itemView, OnArticleListener onArticleListener) {
             super(itemView);
+            itemContainer = itemView.findViewById(R.id.item_container);
             layout = itemView;
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             title = (TextView) itemView.findViewById(R.id.title);
@@ -82,6 +86,11 @@ public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHol
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        //animation
+        holder.imageView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
+        holder.itemContainer.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_scale_animation));
+
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.imageView.setImageResource(articles.get(position).getImageId());

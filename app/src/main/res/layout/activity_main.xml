@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".util.MainActivity">
+    tools:context=".util.MainActivity"
+    android:background="#ffffff">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -26,20 +27,22 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_height="463dp"
+        android:layout_width="379dp"
+        android:layout_height="524dp"
         android:layout_above="@+id/buttonApod"
         android:layout_below="@+id/appBarLayout"
         android:layout_gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:scrollbars="vertical"
+        android:textColor="@color/colorPink"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonApod"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        android:textColor="@color/colorPink"
-        android:textSize="15sp"/>
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonApod"

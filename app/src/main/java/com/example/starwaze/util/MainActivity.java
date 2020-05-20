@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,9 +32,16 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
     protected void onCreate(Bundle savedInstanceState) {
         List<Article> articles = fill_with_article();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setContentView(R.layout.activity_main);
+
+        getSupportActionBar().hide();
 
         buttonApod = (Button) findViewById(R.id.buttonApod);
         buttonApod.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +72,18 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
 
     private List<Article> fill_with_article() {
         this.articles = new ArrayList<>();
+        articles.add(new Article("Understand our solar system", "How many planets are there on our solar system ? What type of planet are each of them? All the answers are here!", R.drawable.solar_system));
+        articles.add(new Article("Life of a star", "If you always wanted to be a star, understand what it takes to be one first", R.drawable.star));
+        articles.add(new Article("What's an eclipse ?", "Do not ever look at an eclipse with bear eyes...here's why", R.drawable.eclipse));
+        articles.add(new Article("Nasa next project", "Be the next nerd", R.drawable.astronaut));
+        articles.add(new Article("The mystery of black holes", "What's in the other side of the tunnel ?", R.drawable.black_hole));
+        articles.add(new Article("How does a spaceship work ?", "Just in case you're called for a mission", R.drawable.space_shuttle));
+        articles.add(new Article("Understand our solar system", "How many planets are there on our solar system ? What type of planet are each of them? All the answers are here!", R.drawable.solar_system));
+        articles.add(new Article("Life of a star", "If you always wanted to be a star, understand what it takes to be one first", R.drawable.star));
+        articles.add(new Article("What's an eclipse ?", "Do not ever look at an eclipse with bear eyes...here's why", R.drawable.eclipse));
+        articles.add(new Article("Nasa next project", "Be the next nerd", R.drawable.astronaut));
+        articles.add(new Article("The mystery of black holes", "What's in the other side of the tunnel ?", R.drawable.black_hole));
+        articles.add(new Article("How does a spaceship work ?", "Just in case you're called for a mission", R.drawable.space_shuttle));
         articles.add(new Article("Understand our solar system", "How many planets are there on our solar system ? What type of planet are each of them? All the answers are here!", R.drawable.solar_system));
         articles.add(new Article("Life of a star", "If you always wanted to be a star, understand what it takes to be one first", R.drawable.star));
         articles.add(new Article("What's an eclipse ?", "Do not ever look at an eclipse with bear eyes...here's why", R.drawable.eclipse));
