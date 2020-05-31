@@ -7,6 +7,10 @@
         android:title="Astronomy Picture Of the Day"
         android:icon="@drawable/ic_menu_apod" />
     <item
+        android:id="@+id/menu_view_my_favorites"
+        android:title="View my favorite articles"
+        android:icon="@drawable/ic_menu_send_a_question" />
+    <item
         android:id="@+id/menu_send_a_question"
         android:title="Send A Question"
         android:icon="@drawable/ic_menu_send_a_question" />

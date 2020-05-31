@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,8 +22,15 @@ import java.util.List;
 
 public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
     private List<Article> articles;
+
+
+
     private OnArticleListener onArticleListener;
     private Context context;
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
 
     public ArticleAdapter(List<Article> articles, Context context, OnArticleListener onArticleListener){
         this.articles = articles;
@@ -37,12 +45,15 @@ public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHol
         ImageView imageView;
         TextView title;
         TextView description;
+        ImageView favImage;
         View layout;
         RelativeLayout itemContainer;
         OnArticleListener onArticleListener;
 
+
         public ViewHolder(@NonNull View itemView, OnArticleListener onArticleListener) {
             super(itemView);
+            favImage = itemView.findViewById(R.id.fav);
             itemContainer = itemView.findViewById(R.id.item_container);
             layout = itemView;
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
@@ -51,6 +62,17 @@ public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHol
             this.onArticleListener = onArticleListener;
 
             itemView.setOnClickListener(this);
+
+            favImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                       if(onArticleListener != null){
+                           int position = getAdapterPosition();
+                           if(position != RecyclerView.NO_POSITION);
+                           onArticleListener.onFavClick(position);
+                       }
+                }
+            });
         }
 
         @Override
@@ -106,6 +128,7 @@ public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHol
 
     public interface OnArticleListener{
         void onArticleClick(int position);
+        void onFavClick(int position);
     }
 
 }
