@@ -10,5 +10,5 @@ In term of functionalities:
  
  ## Articles Display
  
- ![alt text](https://github.com/ouahiza/StarWaze/blob/master/article_display.jpg?raw=true)
+ ![alt text](https://github.com/ouahiza/StarWaze/blob/master/app/src/main/assets/images/article_display.jpg?raw=true)
 
