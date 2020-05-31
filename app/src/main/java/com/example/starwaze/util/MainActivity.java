@@ -26,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -49,13 +50,7 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        List<Article> articles = fill_with_article();
-        favArticles = new ArrayList<Article>();
-
         super.onCreate(savedInstanceState);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -63,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
 
         setContentView(R.layout.activity_main);
 
+        List<Article> articles = fill_with_article();
+        favArticles = new ArrayList<Article>();
         getSupportActionBar().hide();
         context = this;
         favArticlesBtn = findViewById(R.id.fab);
@@ -79,23 +76,18 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
 
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        // in content do not change the layout size
-        // of the RecyclerView
         recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        // define an adapter
         articleAdapter = new ArticleAdapter(articles, getApplication(), this);
-        //new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(articleAdapter);
-
         layoutManager = new LinearLayoutManager(this);
 
         displayingFavs = false;
         favArticlesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //If all articles are shown, on click show the favs, else (favs are shown) show all articles
                 if (!displayingFavs) {
                     articleAdapter.setArticles(favArticles);
                     recyclerView.setAdapter(articleAdapter);
@@ -155,44 +147,6 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
         saveArticle(position);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_apod:
-                openApodActivity();
-                break;
-            case R.id.menu_send_a_question:
-                //openApodActivity();
-                break;
-            case R.id.menu_settings:
-                //openApodActivity();
-                break;
-            case R.id.menu_about_us:
-                //openApodActivity();
-                break;
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    /*ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            int position = viewHolder.getAdapterPosition();
-            if (favArticles.contains(articles.get(position))) {
-                removeArticle(position);
-            } else {
-                saveArticle(position);
-            }
-        }
-    };*/
-
     //to fav an article
     public void saveArticle(int position) {
         Article article = articles.get(position);
@@ -208,26 +162,30 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
         editor.apply();
     }
 
-    /*
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_apod:
+                openApodActivity();
+                break;
+            case R.id.menu_send_a_question:
+                showBuildingToast();
+                break;
+            case R.id.menu_settings:
+                showBuildingToast();
+                break;
+            case R.id.menu_about_us:
+                showBuildingToast();
+                break;
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void showBuildingToast() {
+        StyleableToast.makeText(context, "This feature is not yet build !", R.style.featureBuildingToast).show();
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
-    }*/
 }

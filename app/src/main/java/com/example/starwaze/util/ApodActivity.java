@@ -39,12 +39,9 @@ import com.r0adkll.slidr.Slidr;
 
 
 public class ApodActivity extends AppCompatActivity {
-    private ProgressDialog progressDialog;
     private TextView apodTitle;
     private TextView apodExplanation;
-    //private TextView apodDate;
     private ImageView apodImage;
-    private VideoView apodVideo;
     private Context context;
     public static final String BASE_URL = "https://api.nasa.gov/planetary/";
 
@@ -66,7 +63,6 @@ public class ApodActivity extends AppCompatActivity {
 
         apodTitle = findViewById(R.id.title_apod_activity);
         apodExplanation = findViewById((R.id.explanation_apod_activity));
-        //apodDate = findViewById(R.id.date_apod_activity);
         apodImage = findViewById(R.id.image_apod_activity);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -82,7 +78,7 @@ public class ApodActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Apod> call, Response<Apod> response) {
                 if (!response.isSuccessful()) {
-                    apodTitle.setText("Code: " + response.code());
+                    apodTitle.setText(new StringBuilder().append("Code: ").append(response.code()).toString());
                     return;
                 }
 
@@ -90,30 +86,13 @@ public class ApodActivity extends AppCompatActivity {
 
                 String titleContent = apod.getApodTitle();
                 String explanationContent = apod.getExplanation();
-                //Date dateContent = apod.getDate();
                 String hdurl = apod.getHdurl();
 
                 apodTitle.append(titleContent);
-                //apodDate.append(dateContent.toString());
                 apodExplanation.append(explanationContent);
                 apodExplanation.setMovementMethod(new ScrollingMovementMethod());
 
-                if (apod.getMedia_type().equals("image")) {
-
-                    Glide.with(context).load(hdurl).into(apodImage);
-
-                } //else if (apod.getMedia_type().equals("video")) {
-
-                //apodVideo = (VideoView) findViewById(R.id.video_apod_activity);
-
-//                    MediaController mediaController;
-//                    Log.e("entered", "playvideo");
-//                    Log.e("path is", "" + url);
-//                    progressDialog = ProgressDialog.show(ApodActivity.this, "", "Buffering video...", true);
-//                    progressDialog.setCancelable(true);
-
-                // PlayVideo(url);
-                //}
+                Glide.with(context).load(hdurl).into(apodImage);
             }
 
             @Override
@@ -130,30 +109,4 @@ public class ApodActivity extends AppCompatActivity {
     public void showRotationToast() {
         StyleableToast.makeText(context, "Rotate your phone to see full picture", R.style.rotationToast).show();
     }
-
-    /*private void PlayVideo(String url) {
-        try {
-            getWindow().setFormat(PixelFormat.TRANSLUCENT);
-            MediaController mediaController = new MediaController(ApodActivity.this);
-            mediaController.setAnchorView(apodVideo);
-
-            Uri videoPath = Uri.parse(url);
-            apodVideo.setMediaController(mediaController);
-            apodVideo.setVideoURI(videoPath);
-            apodVideo.requestFocus();
-            apodVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-
-                public void onPrepared(MediaPlayer mp) {
-                    progressDialog.dismiss();
-                    apodVideo.start();
-                }
-            });
-
-        } catch (Exception e) {
-            progressDialog.dismiss();
-            System.out.println("Video Play Error :" + e.toString());
-            finish();
-        }
-
-    }*/
 }

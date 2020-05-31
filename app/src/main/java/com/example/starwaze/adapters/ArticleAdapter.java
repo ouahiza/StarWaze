@@ -20,11 +20,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
+public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
     private List<Article> articles;
-
-
-
     private OnArticleListener onArticleListener;
     private Context context;
 
@@ -32,16 +29,13 @@ public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHol
         this.articles = articles;
     }
 
-    public ArticleAdapter(List<Article> articles, Context context, OnArticleListener onArticleListener){
+    public ArticleAdapter(List<Article> articles, Context context, OnArticleListener onArticleListener) {
         this.articles = articles;
         this.context = context;
         this.onArticleListener = onArticleListener;
     }
-    // Provide a reference to the views for each article item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a article item in a view holder
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        // each article item is just a string in this case
         ImageView imageView;
         TextView title;
         TextView description;
@@ -49,7 +43,6 @@ public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHol
         View layout;
         RelativeLayout itemContainer;
         OnArticleListener onArticleListener;
-
 
         public ViewHolder(@NonNull View itemView, OnArticleListener onArticleListener) {
             super(itemView);
@@ -66,11 +59,11 @@ public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHol
             favImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                       if(onArticleListener != null){
-                           int position = getAdapterPosition();
-                           if(position != RecyclerView.NO_POSITION);
-                           onArticleListener.onFavClick(position);
-                       }
+                    if (onArticleListener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION)
+                            onArticleListener.onFavClick(position);
+                    }
                 }
             });
         }
@@ -93,28 +86,26 @@ public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHol
     }
 
     // Create new views (invoked by the layout manager)
-    @NotNull @Override
+    @NotNull
+    @Override
     public ArticleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
-        // create a new view
+                                                        int viewType) {
+        //Inflating the row layout
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
         View view =
                 inflater.inflate(R.layout.row_layout, parent, false);
-        // set the view's size, margins, paddings and layout parameters
+
         return new ViewHolder(view, onArticleListener);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         //animation
-        holder.imageView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
-        holder.itemContainer.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_scale_animation));
+        holder.imageView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_animation));
+        holder.itemContainer.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_scale_animation));
 
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
         holder.imageView.setImageResource(articles.get(position).getImageId());
         holder.description.setText(articles.get(position).getDescription());
         holder.title.setText(articles.get(position).getTitle());
@@ -126,8 +117,9 @@ public class  ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHol
         return articles.size();
     }
 
-    public interface OnArticleListener{
+    public interface OnArticleListener {
         void onArticleClick(int position);
+
         void onFavClick(int position);
     }
 
