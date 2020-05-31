@@ -10,5 +10,28 @@ In term of functionalities:
  
  ## Articles Display
  
- ![alt text](https://github.com/ouahiza/StarWaze/blob/master/app/src/main/assets/images/article_display.jpg?raw=true)
+ <img src ="images/article_display.png" width=200/>
+
+ ## On article click
+ 
+ <img src ="images/article_on_click_display.png" width=200/>
+ 
+ ## Saving favourite articles and displaying them
+ 
+ <img src ="images/fav_articles_display.png" width=200/>
+ 
+ ## Drawer menu on left swipe
+ 
+ <img src ="images/menu_display.png" width=200/>
+ 
+ ## Astronomy Picture Of the Day
+ 
+ <img src ="images/apod_display.png" width=200/>
+ 
+ ## Astronomy Picture Of the Day details
+ 
+ <img src = "images/apod_display_details.png" width=200/>
+
+
+
 
